@@ -11,6 +11,9 @@ _convert_time_units(){
 	elif (( $(echo "scale=2;$1>300"|bc -l) ));then
 		_TIME=$(echo "$1/60"|bc)
 		_UNITS="hours"
+	else
+		# Nothing to convert, just return
+		return 0
 	fi
 	case $2 in
 		S)
@@ -33,7 +36,7 @@ superblock(){
 	# A Super block from the past.
 	SUPER_BLOCK=880648
 	# The time taken to create a new block
-	BLOCK_TIME=2.5
+	BLOCK_TIME=2.625
 	S_UNITS="minutes";V_UNITS="minutes"
 
 	CURRENT_BLOCK=$(dash-cli getblockcount)
